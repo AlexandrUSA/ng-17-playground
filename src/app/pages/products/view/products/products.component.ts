@@ -12,8 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 
 import { ProductsStore } from '../../store';
 import { ProductDto } from '../../domain';
-import { mergeSignal, mutateSignal } from '../../services/products-store.service';
-import merge from 'lodash/merge';
+import { mutateSignal } from '../../services/products-store.service';
 
 @Component({
   selector: 'app-products',
@@ -32,10 +31,7 @@ export class ProductsComponent implements OnInit {
   constructor() {
     afterNextRender(() => {
       setTimeout(() => {
-        // mutateSignal(this.message, state => (state.active = false));
-        mergeSignal(this.message, { user: { name: 'Alex' }, active: false });
-        this.message.update(value => merge(value, {}));
-        console.log(this.message());
+        mutateSignal(this.message, state => (state.active = false));
       }, 3000);
     });
   }
